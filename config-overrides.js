@@ -6,7 +6,8 @@ module.exports = function override(config) {
     '@features': 'src/features',
     '@pages': 'src/pages',
     '@shared': 'src/shared',
-    '@util': 'src/shared/util'
+    '@utils': 'src/shared/utils',
+    '@components': 'src/shared/components',
   })(config);
 
   return config;
