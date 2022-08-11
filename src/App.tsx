@@ -1,14 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
+import '@util/i18n';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t } = useTranslation(['translation']);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          {t('title')}
         </p>
         <a
           className="App-link"
