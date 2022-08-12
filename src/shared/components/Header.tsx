@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { useState, MouseEvent } from 'react';
+import { selectLocale, setLocale } from '../../store/slices/languageSlice';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,18 +13,24 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-
-const pages = ['Products', 'Pricing', 'Blog'];
+import { useTranslation } from 'react-i18next';
+import { CN, SG } from 'country-flag-icons/react/3x2'
+import { useSelector, useDispatch } from "react-redux";
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import i18next from 'i18next';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+const Header = () => {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const {t} = useTranslation('translation');
+
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -35,6 +42,14 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
+  const locale = useAppSelector(selectLocale);
+  const dispatch = useAppDispatch();
+
+  const onClickHandler = (e:Event) => {
+    const newLocale = (locale==='en'?'cn':'en');
+    dispatch(setLocale(newLocale));
+    i18next.changeLanguage(newLocale);
+  }
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -55,7 +70,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            {t('title')}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -87,9 +102,9 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {t('nav.nav-items', { returnObjects: true }).map((item) => (
+                <MenuItem key={item.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{item.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -114,16 +129,24 @@ const Header = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {t('nav.nav-items', { returnObjects: true }).map((item) => (
               <Button
-                key={page}
+                key={item.name}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {item.name}
               </Button>
             ))}
           </Box>
+
+          <Box sx={{width: { xs: 40 },"& .MuiInputBase-root": {height: 80}, m:{xs: 2}, cursor:'pointer'}}
+               onClick={onClickHandler}>
+            {locale==='en'&&<SG title="Singapore" />}
+            {locale==='cn'&&<CN title="China" />}
+
+          </Box>
+         
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -147,7 +170,7 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {t('nav.menu-items',{returnObjects:true}).map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>

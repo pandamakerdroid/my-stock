@@ -1,0 +1,10 @@
+{
+    "title":"我的股票",
+    "nav":{
+        "nav-items":[
+            {"name":"股票","href":"/stocks"},
+            {"name":"加密货币","href":"/cryptos"},
+            {"name":"联系我们","href":"/cryptos"}],
+        "menu-items":["Profile","Account","Dashboard","Logout"]
+    }
+}
