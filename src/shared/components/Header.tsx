@@ -18,6 +18,8 @@ import { CN, SG } from 'country-flag-icons/react/3x2'
 import { useSelector, useDispatch } from "react-redux";
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import i18next from 'i18next';
+
+import { Link } from 'react-router-dom';
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
@@ -51,7 +53,8 @@ const Header = () => {
     i18next.changeLanguage(newLocale);
   }
   return (
-    <AppBar position="static">
+    <AppBar position="fixed"
+            sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -59,7 +62,6 @@ const Header = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -70,8 +72,9 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            {t('title')}
+
           </Typography>
+          <Link to="/">{t('title')}</Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -135,7 +138,7 @@ const Header = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {item.name}
+                <Link to={item.href}>{item.name}</Link>
               </Button>
             ))}
           </Box>

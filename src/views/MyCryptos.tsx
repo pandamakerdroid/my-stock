@@ -1,4 +1,4 @@
-const MyStocks = (props:{}) => {
+const MyCryptos = (props:{}) => {
     return (
         <>
             HELLO WORLD!
@@ -6,4 +6,4 @@ const MyStocks = (props:{}) => {
     )
 }
 
-export default MyStocks;
+export default MyCryptos;
