@@ -1,0 +1,16 @@
+{
+    "title":"My Stocks",
+    "nav":{
+        "nav-items":[
+            {"name":"Stocks","href":"/stocks"},
+            {"name":"Cryptos","href":"/cryptos"},
+            {"name":"Contact","href":"/cryptos"}],
+        "menu-items":["Profile","Account","Dashboard","Logout"]
+    },
+    "buttons":{
+        "search": "Search"
+    },
+    "labels":{
+        "search-field":"Search Field"
+    }
+}
