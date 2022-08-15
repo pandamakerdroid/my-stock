@@ -18,7 +18,7 @@ const getStock = (req,res) =>{
 
     // The whole response has been received. Print out the result.
     resp.on('end', () => {
-        data = stockHelper.processDataForHighChart(data);
+        data = stockHelper.processDataForHighChart(JSON.parse(data));
         res.send(JSON.parse(data))
     });
 
