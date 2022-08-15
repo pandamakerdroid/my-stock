@@ -12,20 +12,40 @@ import { Box,
         } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { getData } from "@utils/data";
+import { FetchPriceHistory } from "../../api/stockApi";
 import { useTranslation } from "react-i18next";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { 
+	//read operations
+	selectInterval,
+	selectRange,
+	selectPeriod1,
+	selectPeriod2
+} from '../../store/slices/stockDataSlice';
 
 const drawerWidth = 240;
 
 function ListPanel() {
+  const dispatch = useAppDispatch();
+
+  const interval = useAppSelector(selectInterval);
+  const range = useAppSelector(selectRange);
+  const period1 = useAppSelector(selectPeriod1);
+  const period2 = useAppSelector(selectPeriod2);
+
   const {t} = useTranslation('translation');
   const [searchText, setSearchText]= useState(null);
   const handleOnKeyUp = (e: any) => {
-    if(e.key === 'Enter') { 
+    if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
       setSearchText(e.target.value);
-      getData({symbol:searchText})
+      FetchPriceHistory({symbol:e.target.value,
+                         interval:interval,
+                         period1:period1,
+                         period2:period2,
+                         range:range,
+                         dispatch:dispatch})
      }
   }
     return <>

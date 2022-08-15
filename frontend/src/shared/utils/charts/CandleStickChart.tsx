@@ -1,61 +1,55 @@
 import { useState } from 'react';
 import Highcharts from 'highcharts/highstock';
 
-function CandleStickChart() {
+function CandleStickChart(props:any) {
 
+    setTimeout(() =>{
+        (Highcharts as any).stockChart('container', {
+            rangeSelector: {
+                selected: 2
+            },
+            yAxis: [{
+                height: '75%',
+                resize: {
+                    enabled: true
+                },
+                labels: {
+                    align: 'right',
+                    x: -3
+                },
+                title: {
+                    text: props.symbol?props.symbol:''
+                }
+            }, {
+                top: '75%',
+                height: '25%',
+                labels: {
+                    align: 'right',
+                    x: -3
+                },
+                offset: 0,
+                title: {
+                    text: 'MACD'
+                }
+            }],
 
-  fetch('https://demo-live-data.highcharts.com/aapl-ohlc.json')
-  .then((response) => response.json())
-  .then((responseJson) => {
-    (Highcharts as any).stockChart('container', {
-        rangeSelector: {
-            selected: 2
-        },
-        yAxis: [{
-            height: '75%',
-            resize: {
-                enabled: true
-            },
-            labels: {
-                align: 'right',
-                x: -3
-            },
             title: {
-                text: 'AAPL'
-            }
-        }, {
-            top: '75%',
-            height: '25%',
-            labels: {
-                align: 'right',
-                x: -3
+                text: `${props.symbol?props.symbol:''} Stock Price`
             },
-            offset: 0,
-            title: {
-                text: 'MACD'
-            }
-        }],
 
-        title: {
-            text: 'AAPL Stock Price'
-        },
+            subtitle: {
+                text: 'With MACD and Pivot Points technical indicators'
+            },
 
-        subtitle: {
-            text: 'With MACD and Pivot Points technical indicators'
-        },
-
-        series: [{
-            type: 'ohlc',
-            id: 'aapl',
-            name: 'AAPL Stock Price',
-            data: responseJson,
-            zIndex: 1
-        }]
-    });
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+            series: [{
+                type: 'candlestick',
+                id: props.symbol?props.symbol:'',
+                name: `${props.symbol?props.symbol:''} Stock Price`,
+                data: props.quote?props.quote:[],
+                zIndex: 1,
+            }]
+        })
+    },(props.quote.length===0?500:0))
 
   
     return <>

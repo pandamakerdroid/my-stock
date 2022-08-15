@@ -4,12 +4,18 @@ function stockHelper(){
 
 stockHelper.processDataForHighChart = (rawData) => {
     if (!rawData.chart ||
-        !rawData.chart.result[0] ||
+        !rawData.chart.result ||
+        !rawData.chart.result||
         !rawData.chart.result[0].meta)
         {
             return null; //reject corrupted/empty data set 
         }
-
+    if(!rawData.chart.result[0].timestamp ||
+        !rawData.chart.result[0].indicators.quote[0].open||
+        !rawData.chart.result[0].indicators.quote[0].close||
+        !rawData.chart.result[0].indicators.quote[0].low||
+        !rawData.chart.result[0].indicators.quote[0].high
+        ) {return null;}
     if ( rawData.chart.result[0].timestamp.length !== rawData.chart.result[0].indicators.quote[0].open.length||
         rawData.chart.result[0].timestamp.length !== rawData.chart.result[0].indicators.quote[0].close.length ||
         rawData.chart.result[0].timestamp.length !== rawData.chart.result[0].indicators.quote[0].low.length ||
@@ -19,7 +25,7 @@ stockHelper.processDataForHighChart = (rawData) => {
         }
 
     // NO IDEA WHEN WILL YAHOO CHANGE THEIR APIS.. BUT AS OF 15.08.2022, THIS WORKS
-    
+
     const timestamps = rawData.chart.result[0].timestamp;
     const opens = rawData.chart.result[0].indicators.quote[0].open;
     const highs = rawData.chart.result[0].indicators.quote[0].high;
@@ -28,7 +34,11 @@ stockHelper.processDataForHighChart = (rawData) => {
 
     let priceData= [];
     timestamps.forEach((timestamp,i) => {
-        priceData.push([timestamp,opens[i],highs[i],lows[i],closes[i]]);
+        priceData.push([timestamp*1000,
+                        parseFloat(opens[i].toFixed(2)),
+                        parseFloat(highs[i].toFixed(2)),
+                        parseFloat(lows[i].toFixed(2)),
+                        parseFloat(closes[i].toFixed(2))]);
     })
     let data = 
     { 
@@ -39,9 +49,9 @@ stockHelper.processDataForHighChart = (rawData) => {
         validRanges: rawData.chart.result[0].meta.validRanges,
         period1: rawData.chart.result[0].timestamp[0], //timestamp start
         period2: rawData.chart.result[0].timestamp[rawData.chart.result[0].timestamp.length-1], //timestamp end
-        priceData: priceData
+        quote: priceData
     }
-    console.log(rawData.chart.result[0].timestamp.length );
+    console.log(rawData.chart.result[0].timestamp.length + " entries");
     return JSON.stringify(data);
 }
 
