@@ -9,18 +9,22 @@ export interface stockDataState {
   validRanges: {},
   period1: number, //timestamp start
   period2: number, //timestamp end
-  quote: []
+  quote: [],
+  volume: [],
+  browseHistory: [],
 }
 
 export const initialState: stockDataState = {
-  symbol: 'GOOG',
+  symbol: '',
   currency: 'USD',
   interval: '1h', //1h,1d,1d,1w etc.
   range: '3mo',
   validRanges: [],
   period1: new Date().setDate(new Date().getDate() - 30), //timestamp start
   period2: Date.now(), //timestamp end
-  quote: []
+  quote: [],
+  volume: [],
+  browseHistory: [],
 };
 
 
@@ -68,6 +72,14 @@ export const stockDataSlice = createSlice({
     },
     setQuote: (state,action: PayloadAction<[]>) => {
       state.quote = action.payload;
+    },
+    setVolume: (state,action: PayloadAction<[]>) => {
+      state.volume = action.payload;
+    },
+    setBrowseHistory: (state,action: PayloadAction<string>) => {
+      state.browseHistory.includes(action.payload)?
+        state.browseHistory=state.browseHistory:
+        state.browseHistory.push(action.payload);
     }
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -95,7 +107,9 @@ export const {
   setValidRanges,
   setPeriod1,
   setPeriod2,
-  setQuote
+  setQuote,
+  setVolume,
+  setBrowseHistory
 } = stockDataSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
@@ -111,6 +125,8 @@ export const selectValidRanges = (state:RootState)=>state.stockData.validRanges;
 export const selectPeriod1 = (state:RootState)=>state.stockData.period1;
 export const selectPeriod2 = (state:RootState)=>state.stockData.period2;
 export const selectQuote = (state:RootState)=>state.stockData.quote;
+export const selectVolume = (state:RootState)=>state.stockData.volume;
+export const selectBrowseHistory = (state:RootState)=>state.stockData.browseHistory;
 
 
 export default stockDataSlice.reducer;

@@ -19,10 +19,13 @@ import { useState } from "react";
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { 
 	//read operations
+  selectSymbol,
 	selectInterval,
 	selectRange,
 	selectPeriod1,
-	selectPeriod2
+	selectPeriod2,
+  selectBrowseHistory,
+  setSymbol,
 } from '../../store/slices/stockDataSlice';
 
 const drawerWidth = 240;
@@ -30,13 +33,14 @@ const drawerWidth = 240;
 function ListPanel() {
   const dispatch = useAppDispatch();
 
+  const symbol= useAppSelector(selectSymbol)
   const interval = useAppSelector(selectInterval);
   const range = useAppSelector(selectRange);
   const period1 = useAppSelector(selectPeriod1);
   const period2 = useAppSelector(selectPeriod2);
-
+  const browseHistory = useAppSelector(selectBrowseHistory);
   const {t} = useTranslation('translation');
-  const [searchText, setSearchText]= useState(null);
+  const [searchText, setSearchText]= useState('');
   const handleOnKeyUp = (e: any) => {
     if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
       setSearchText(e.target.value);
@@ -47,6 +51,23 @@ function ListPanel() {
                          range:range,
                          dispatch:dispatch})
      }
+  }
+  const handleClick = (e:any) => {
+    const historySymbol = (e.target.id && e.target.id!='')?e.target.id:e.target.innerText
+    if(historySymbol !== symbol){
+      setSearchText(historySymbol);
+      dispatch(setSymbol(historySymbol));
+      FetchPriceHistory({symbol:historySymbol,
+        interval:interval,
+        period1:period1,
+        period2:period2,
+        range:range,
+        dispatch:dispatch})
+      }
+  }
+
+  const handleChange = (e:any) => {
+    setSearchText(e.target.value);
   }
     return <>
         <Drawer
@@ -71,26 +92,15 @@ function ListPanel() {
             type="search"
             variant="filled"
             sx={{mt:3}}
+            value={searchText}
+            onChange={handleChange}
             onKeyUp={handleOnKeyUp}
             />
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+            {browseHistory.map((text:string, index:number) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
+                <ListItemButton id={text} onClick={handleClick}>
+                  <ListItemIcon >
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} />

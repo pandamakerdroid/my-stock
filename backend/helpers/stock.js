@@ -31,14 +31,16 @@ stockHelper.processDataForHighChart = (rawData) => {
     const highs = rawData.chart.result[0].indicators.quote[0].high;
     const lows = rawData.chart.result[0].indicators.quote[0].low;
     const closes = rawData.chart.result[0].indicators.quote[0].close;
-
+    const volume = rawData.chart.result[0].indicators.quote[0].volume;
     let priceData= [];
+    let volumeData = [];
     timestamps.forEach((timestamp,i) => {
         priceData.push([timestamp*1000,
                         parseFloat(opens[i].toFixed(2)),
                         parseFloat(highs[i].toFixed(2)),
                         parseFloat(lows[i].toFixed(2)),
                         parseFloat(closes[i].toFixed(2))]);
+        volumeData.push([timestamp*1000,volume[i]]);
     })
     let data = 
     { 
@@ -49,7 +51,8 @@ stockHelper.processDataForHighChart = (rawData) => {
         validRanges: rawData.chart.result[0].meta.validRanges,
         period1: rawData.chart.result[0].timestamp[0], //timestamp start
         period2: rawData.chart.result[0].timestamp[rawData.chart.result[0].timestamp.length-1], //timestamp end
-        quote: priceData
+        quote: priceData,
+        volume: volumeData
     }
     console.log(rawData.chart.result[0].timestamp.length + " entries");
     return JSON.stringify(data);

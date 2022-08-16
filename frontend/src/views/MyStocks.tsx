@@ -15,6 +15,7 @@ import {
 	selectPeriod1,
 	selectPeriod2,
 	selectQuote,
+    selectVolume
 } from '../store/slices/stockDataSlice';
 
 const MyStocks = (props:{}) => {
@@ -27,6 +28,7 @@ const MyStocks = (props:{}) => {
     const period1 = useAppSelector(selectPeriod1);
     const period2 = useAppSelector(selectPeriod2);
     const quote = useAppSelector(selectQuote);
+    const volume = useAppSelector(selectVolume);
 
     const chartRef = useRef(null);
     const updateChart = () => {
@@ -50,7 +52,8 @@ const MyStocks = (props:{}) => {
                     validRanges = {validRanges}
                     period1 = {period1}
                     period2 = {period2}
-                    quote = {quote}/>
+                    quote = {quote}
+                    volume = {volume}/>
             </Grid>
         </Grid>
     )
