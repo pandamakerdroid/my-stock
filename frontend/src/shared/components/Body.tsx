@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useLocation,useNavigate } from 'react-router-dom';
-import MyStocks from '../../views/MyStocks';
+import FAQ from '@views/FAQ';
+import MyStocks from '@views/MyStocks';
 import Container from '@mui/material/Container';
 
 function Body(props:any) {
@@ -8,6 +9,7 @@ function Body(props:any) {
         <Routes>
           <Route path="/" element={<MyStocks/>}></Route>
           <Route path="/stocks" element={<MyStocks/>}></Route>
+          <Route path="/faq" element={<FAQ/>}></Route>
 
         </Routes>
       </Container>
