@@ -13,17 +13,17 @@ import {
 } from '../store/slices/stockDataSlice';
 
 const apiRoutes = {
-	'stockPrice': '/api/v1/stock'
+	quote: '/api/v1/stock/quote'
 }
 
 
-export const FetchPriceHistory = (props:any) => {
+export const fetchQuote = (props:any) => {
 //	${(props.period1> 0 && props.period2> 0)?('&period1='+props.period1+'&period2='+props.period2):''}
-	console.log(process.env.REACT_APP_HOST+apiRoutes.stockPrice+'/'+props.symbol+'?events=div%7Csplit'+
+	console.log(process.env.REACT_APP_HOST+apiRoutes.quote+'/'+props.symbol+'?events=div%7Csplit'+
 	'&interval='+props.interval+
 	'&range='+props.range)
 	
-	fetch(process.env.REACT_APP_HOST+apiRoutes.stockPrice+'/'+props.symbol+'?events=div%7Csplit'+
+	fetch(process.env.REACT_APP_HOST+apiRoutes.quote+'/'+props.symbol+'?events=div%7Csplit'+
 	'&interval='+props.interval+
 	'&range='+props.range)
 	.then(response => response.text())

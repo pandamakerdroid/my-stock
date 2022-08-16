@@ -17,8 +17,8 @@ export interface stockDataState {
 export const initialState: stockDataState = {
   symbol: '',
   currency: 'USD',
-  interval: '1h', //1h,1d,1d,1w etc.
-  range: '3mo',
+  interval: '1d', //1h,1d,1d,1w etc.
+  range: 'max',
   validRanges: [],
   period1: new Date().setDate(new Date().getDate() - 30), //timestamp start
   period2: Date.now(), //timestamp end

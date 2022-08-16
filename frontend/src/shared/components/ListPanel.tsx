@@ -12,7 +12,7 @@ import { Box,
         } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { FetchPriceHistory } from "../../api/stockApi";
+import { fetchQuote } from "../../api/stockApi";
 import { useTranslation } from "react-i18next";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
@@ -44,7 +44,7 @@ function ListPanel() {
   const handleOnKeyUp = (e: any) => {
     if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
       setSearchText(e.target.value);
-      FetchPriceHistory({symbol:e.target.value,
+      fetchQuote({symbol:e.target.value,
                          interval:interval,
                          period1:period1,
                          period2:period2,
@@ -57,7 +57,7 @@ function ListPanel() {
     if(historySymbol !== symbol){
       setSearchText(historySymbol);
       dispatch(setSymbol(historySymbol));
-      FetchPriceHistory({symbol:historySymbol,
+      fetchQuote({symbol:historySymbol,
         interval:interval,
         period1:period1,
         period2:period2,
