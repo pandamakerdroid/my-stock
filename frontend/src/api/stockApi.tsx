@@ -19,7 +19,7 @@ import {
 	setFiftyTwoWeekHigh,
 	setIpoExpectedDate,
 	setAverageAnalystRating,
-} from '../store/slices/stockDataSlice';
+} from '@store/slices/stockDataSlice';
 
 const apiRoutes = {
 	companyInfo: '/api/v1/stock/company-info/',
@@ -30,6 +30,7 @@ export const fetchCompanyInfo = (props:any) => {
 	fetch(process.env.REACT_APP_HOST + apiRoutes.companyInfo + props.symbol)
 	.then(response => response.json())
 	.then(data => {
+		console.log(data);
 		if(!data.name){return;}
 		props.dispatch(setName(data.name));
 		props.dispatch(setAsk(data.ask));

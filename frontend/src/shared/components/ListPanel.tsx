@@ -12,7 +12,7 @@ import { Box,
         } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { fetchQuote } from "@api/stockApi";
+import { fetchCompanyInfo, fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
@@ -42,15 +42,19 @@ function ListPanel() {
   const {t} = useTranslation('translation');
   const [searchText, setSearchText]= useState('');
   const handleOnKeyUp = (e: any) => {
-    if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
-      setSearchText(e.target.value);
-      fetchQuote({symbol:e.target.value,
-                         interval:interval,
-                         period1:period1,
-                         period2:period2,
-                         range:range,
-                         dispatch:dispatch})
-     }
+    if(e.target.value.length>=2){
+      fetchCompanyInfo({symbol:e.target.value, dispatch:dispatch})
+      if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
+        setSearchText(e.target.value);
+        fetchQuote({symbol:e.target.value,
+                           interval:interval,
+                           period1:period1,
+                           period2:period2,
+                           range:range,
+                           dispatch:dispatch})
+       }
+    }
+   
   }
   const handleClick = (e:any) => {
     const historySymbol = (e.target.id && e.target.id!='')?e.target.id:e.target.innerText

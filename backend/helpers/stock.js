@@ -59,11 +59,17 @@ stockHelper.processDataForHighChart = (rawData) => {
 }
 
 stockHelper.processCompanyInfo = (rawData) => {
-    if(!rawData.quoteResponse || !rawData.quoteResponse.result || !rawData.quoteResponse.result[0]){
+    if(!rawData.quoteResponse ||
+        !rawData.quoteResponse.result ||
+        !rawData.quoteResponse.result[0]){
         return JSON.stringify({message:"no matching company found with input ticker"});
     }
+
     rawData=rawData.quoteResponse.result[0];
-    console.log(rawData.ipoExpectedDate)
+
+    if(!rawData.shortName || !rawData.bid || !rawData.ask){
+        return JSON.stringify({message:"We found some seaweed captain!"});
+    }
     let data = {
         name: rawData.shortName,
         bid: rawData.bid,
