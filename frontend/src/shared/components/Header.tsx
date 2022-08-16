@@ -1,5 +1,5 @@
 import { useState, MouseEvent } from 'react';
-import { selectLocale, setLocale } from '../../store/slices/languageSlice';
+import { selectLocale, setLocale } from '@store/slices/languageSlice';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useTranslation } from 'react-i18next';
 import { CN, SG } from 'country-flag-icons/react/3x2'
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
 import i18next from 'i18next';
 
 import { Link } from 'react-router-dom';

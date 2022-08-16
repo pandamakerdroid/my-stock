@@ -12,11 +12,11 @@ import { Box,
         } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { fetchQuote } from "../../api/stockApi";
+import { fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { 
 	//read operations
   selectSymbol,
@@ -26,7 +26,7 @@ import {
 	selectPeriod2,
   selectBrowseHistory,
   setSymbol,
-} from '../../store/slices/stockDataSlice';
+} from '@store/slices/stockDataSlice';
 
 const drawerWidth = 240;
 

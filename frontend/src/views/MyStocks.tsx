@@ -1,10 +1,8 @@
 import { Grid } from "@mui/material";
 import ListPanel from '@components/ListPanel';
-import { render } from "@testing-library/react";
 import Charts from "@utils/charts";
-import React, { useState, useRef } from "react";
-import { useEffect } from "react";
-import { useAppSelector } from '../store/hooks';
+import { useState, useRef } from "react";
+import { useAppSelector } from '@store/hooks';
 import { 
 	//read operations
 	selectSymbol,
@@ -15,8 +13,8 @@ import {
 	selectPeriod1,
 	selectPeriod2,
 	selectQuote,
-    selectVolume
-} from '../store/slices/stockDataSlice';
+    selectVolume,
+} from '@store/slices/stockDataSlice';
 
 const MyStocks = (props:{}) => {
     const [input, setInput] = useState("");

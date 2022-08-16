@@ -2,6 +2,7 @@
     "compilerOptions":{
         "baseUrl": ".",
         "paths": {
+            "@api": ["src/api"],
             "@core": ["src/core"],
             "@store": ["src/store"],
             "@features": ["src/features"],
