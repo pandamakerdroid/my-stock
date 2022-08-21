@@ -1,5 +1,4 @@
 import { Box,
-         InputAdornment,
          Drawer,
          List,
          ListItem,
@@ -7,14 +6,11 @@ import { Box,
          Toolbar,
          ListItemIcon,
          ListItemText,
-         Divider,
-         TextField
         } from "@mui/material";
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { fetchCompanyInfo, fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
-import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { 
@@ -28,6 +24,9 @@ import {
   setSymbol,
 } from '@store/slices/stockDataSlice';
 
+import {setSearchText} from '@store/slices/uiSlice';
+import TickerAutoComplete from '@partials/TickerAutoComplete';
+
 const drawerWidth = 240;
 
 function ListPanel() {
@@ -40,26 +39,11 @@ function ListPanel() {
   const period2 = useAppSelector(selectPeriod2);
   const browseHistory = useAppSelector(selectBrowseHistory);
   const {t} = useTranslation('translation');
-  const [searchText, setSearchText]= useState('');
-  const handleOnKeyUp = (e: any) => {
-    if(e.target.value.length>=2){
-      fetchCompanyInfo({symbol:e.target.value, dispatch:dispatch})
-      if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
-        setSearchText(e.target.value);
-        fetchQuote({symbol:e.target.value,
-                           interval:interval,
-                           period1:period1,
-                           period2:period2,
-                           range:range,
-                           dispatch:dispatch})
-       }
-    }
-   
-  }
+
   const handleClick = (e:any) => {
     const historySymbol = (e.target.id && e.target.id!='')?e.target.id:e.target.innerText
     if(historySymbol !== symbol){
-      setSearchText(historySymbol);
+      dispatch(setSearchText(historySymbol));
       dispatch(setSymbol(historySymbol));
       fetchQuote({symbol:historySymbol,
         interval:interval,
@@ -68,10 +52,6 @@ function ListPanel() {
         range:range,
         dispatch:dispatch})
       }
-  }
-
-  const handleChange = (e:any) => {
-    setSearchText(e.target.value);
   }
     return <>
         <Drawer
@@ -84,22 +64,7 @@ function ListPanel() {
       >
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
-            <TextField
-            id="filled-search"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-            type="search"
-            variant="filled"
-            sx={{mt:3}}
-            value={searchText}
-            onChange={handleChange}
-            onKeyUp={handleOnKeyUp}
-            />
+          <TickerAutoComplete/>
           <List>
             {browseHistory.map((text:string, index:number) => (
               <ListItem key={text} disablePadding>

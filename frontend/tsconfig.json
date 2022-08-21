@@ -24,5 +24,21 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  // @trivago/prettier-plugin-sort-imports config 
+  "printWidth": 80,
+  "tabWidth": 4,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "semi": true,
+  "importOrder": ["^@core/(.*)$",
+                  "^@store/(.*)$",
+                  "^@server/(.*)$",
+                  "^@shared/(.*)$",
+                  "^@partials/(.*)$",
+                  "^@ui/(.*)$",
+                  "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+  //
 }

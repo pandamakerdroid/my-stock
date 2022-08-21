@@ -13,6 +13,7 @@ export interface stockDataState {
   quote: [],
   volume: [],
   browseHistory: [],
+  searchHistory: [],
   ask: number,
   bid: number,
   epsForward: number,
@@ -35,6 +36,7 @@ export const initialState: stockDataState = {
   quote: [],
   volume: [],
   browseHistory: [],
+  searchHistory: [],
   ask: 0,
   bid: 0,
   epsForward: 0,
@@ -101,6 +103,20 @@ export const stockDataSlice = createSlice({
         state.browseHistory=state.browseHistory:
         state.browseHistory.push(action.payload);
     },
+    setSearchHistory: (state,action: PayloadAction<[]>) => {
+      // if symbol is cleared, clear searchHistory
+      if(state.symbol === ''){
+        state.searchHistory = [];
+        return;
+      }
+      // if the input symbol does not resemble as the subset of any searched history, clear the set
+      if(search.searchHistory.filter(history=>history.symbol.contains(state.symbol))===0)
+        {state.searchHistory = []}
+      //  add payload to the search history
+      state.searchHistory.includes(action.payload)?
+      state.searchHistory=state.browseHistory:
+      state.searchHistory.push(action.payload);
+    },
     setAsk: (state, action: PayloadAction<number>) => {
       state.ask = action.payload;
     },
@@ -155,6 +171,7 @@ export const {
   setQuote,
   setVolume,
   setBrowseHistory,
+  setSearchHistory,
   setAsk,
   setBid,
   setEpsForward,
@@ -181,6 +198,7 @@ export const selectPeriod2 = (state:RootState)=>state.stockData.period2;
 export const selectQuote = (state:RootState)=>state.stockData.quote;
 export const selectVolume = (state:RootState)=>state.stockData.volume;
 export const selectBrowseHistory = (state:RootState)=>state.stockData.browseHistory;
+export const selectSearchHistory = (state:RootState)=>state.stockData.searchHistory;
 export const selectAsk = (state:RootState)=>state.stockData.ask;
 export const selectBid = (state:RootState)=>state.stockData.bid;
 export const selectEpsForward = (state:RootState)=>state.stockData.epsForward;

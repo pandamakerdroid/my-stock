@@ -11,6 +11,7 @@ import {
 	setQuote,
 	setVolume,
 	setBrowseHistory,
+	setSearchHistory,
 	setAsk,
 	setBid,
 	setEpsForward,
@@ -31,7 +32,8 @@ export const fetchCompanyInfo = (props:any) => {
 	.then(response => response.json())
 	.then(data => {
 		console.log(data);
-		if(!data.name){return;}
+		if(!data.name || !data.ask || !data.bid){return;} //filter out 404 and seaweeds
+		props.dispatch(setSearchHistory(data))
 		props.dispatch(setName(data.name));
 		props.dispatch(setAsk(data.ask));
 		props.dispatch(setBid(data.bid));

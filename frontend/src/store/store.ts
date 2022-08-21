@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import languageReducer from './slices/languageSlice';
 import stockDataReducer from './slices/stockDataSlice';
+import uiReducer from './slices/uiSlice';
 
 export const store = configureStore({
   reducer: {
     language: languageReducer,
     stockData: stockDataReducer,
+    ui: uiReducer,
   },
 });
 

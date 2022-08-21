@@ -4,7 +4,8 @@
         "nav-items":[
             {"name":"Stocks","href":"/stocks"},
             {"name":"Cryptos","href":"/cryptos"},
-            {"name":"Contact","href":"/cryptos"}],
+            {"name":"FAQ","href":"/faq"},
+            {"name":"Contact","href":"/contact"}],
         "menu-items":["Profile","Account","Dashboard","Logout"]
     },
     "buttons":{
