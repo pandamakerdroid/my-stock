@@ -28,11 +28,17 @@ const apiRoutes = {
 }
 
 export const fetchCompanyInfo = (props:any) => {
+	// if the input symbol does not resemble as the subset of any searched history, clear the set
+	if(props.searchHistory.filter((history:any)=>history.symbol.contains(props.symbol))===0)
+	{props.dispatch(setSearchHistory([]))}
+
 	fetch(process.env.REACT_APP_HOST + apiRoutes.companyInfo + props.symbol)
 	.then(response => response.json())
 	.then(data => {
 		console.log(data);
 		if(!data.name || !data.ask || !data.bid){return;} //filter out 404 and seaweeds
+
+      //  add payload to the search history
 		props.dispatch(setSearchHistory(data))
 		props.dispatch(setName(data.name));
 		props.dispatch(setAsk(data.ask));

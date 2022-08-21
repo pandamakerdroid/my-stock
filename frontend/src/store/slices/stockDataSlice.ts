@@ -105,16 +105,16 @@ export const stockDataSlice = createSlice({
     },
     setSearchHistory: (state,action: PayloadAction<[]>) => {
       // if symbol is cleared, clear searchHistory
-      if(state.symbol === ''){
+      /*if(state.symbol === ''){
         state.searchHistory = [];
         return;
-      }
+      }*/
       // if the input symbol does not resemble as the subset of any searched history, clear the set
-      if(search.searchHistory.filter(history=>history.symbol.contains(state.symbol))===0)
-        {state.searchHistory = []}
+      ///if(state.searchHistory.filter(history=>history.symbol.contains(state.symbol))===0)
+      ///  {state.searchHistory = []}
       //  add payload to the search history
-      state.searchHistory.includes(action.payload)?
-      state.searchHistory=state.browseHistory:
+      (state.searchHistory.filter(history=>history.symbol===state.symbol)===0)?
+      state.searchHistory=state.searchHistory:
       state.searchHistory.push(action.payload);
     },
     setAsk: (state, action: PayloadAction<number>) => {

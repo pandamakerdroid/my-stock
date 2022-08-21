@@ -1,10 +1,10 @@
 import {
+    Autocomplete,
     TextField,
     InputAdornment,
    } from "@mui/material";
 import { fetchCompanyInfo, fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { 
 //read operations
@@ -24,7 +24,6 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const TickerAutoComplete = (props :any) => {
     const dispatch = useAppDispatch();
-
     const searchText = useAppSelector(selectSearchText);
     const symbol= useAppSelector(selectSymbol);
     const interval = useAppSelector(selectInterval);
@@ -36,7 +35,7 @@ const TickerAutoComplete = (props :any) => {
 
     const handleOnKeyUp = (e: any) => {
         if(e.target.value.length>=2){
-          fetchCompanyInfo({symbol:e.target.value, dispatch:dispatch})
+          fetchCompanyInfo({symbol:e.target.value, searchHistory:searchHistory, dispatch:dispatch})
           if(e.key === 'Enter' && e.target.value && e.target.value!=='') { 
             dispatch(setSearchText(e.target.value));
             fetchQuote({symbol:e.target.value,
@@ -55,21 +54,49 @@ const TickerAutoComplete = (props :any) => {
       }
 
     return (
-        <TextField
-        id="filled-search"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-        type="search"
-        variant="filled"
-        sx={{mt:3}}
-        onChange={handleChange}
-        onKeyUp={handleOnKeyUp}
-        />
+        <>
+            <TextField
+            id="filled-search"
+            InputProps={{
+            startAdornment: (
+                <InputAdornment position="start">
+                <SearchIcon />
+                </InputAdornment>
+            ),
+            }}
+            type="search"
+            variant="filled"
+            sx={{mt:3}}
+            onChange={handleChange}
+            onKeyUp={handleOnKeyUp}
+            />
+
+            <Autocomplete
+            id="size-small-standard"
+            size="small"
+            options={searchHistory}
+            getOptionLabel={(option) => (option && option.symbol) ? option.symbol:''}
+            onInputChange={(event: object, value: string, reason: string) => {
+                if (reason === 'input' && value.length>=2) {
+                    console.log(value);
+                    dispatch(setSearchText(value));
+                    fetchCompanyInfo({symbol:value, searchHistory:searchHistory, dispatch:dispatch});
+                    console.log(searchHistory);
+                }
+            }}
+            renderInput={(params) => (
+                <TextField
+                    {...params}
+                    variant="standard"
+                    label="Search"
+                    placeholder="by ticker"
+                    onChange={handleChange}
+                    onKeyUp={handleOnKeyUp}
+                />
+            )}
+            />
+        </>
+
     )
 }
 export default TickerAutoComplete;
