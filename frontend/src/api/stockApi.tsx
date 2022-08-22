@@ -29,7 +29,8 @@ const apiRoutes = {
 
 export const fetchCompanyInfo = (props:any) => {
 	// if the input symbol does not resemble as the subset of any searched history, clear the set
-	if(props.searchHistory.filter((history:any)=>history.symbol.contains(props.symbol))===0)
+	console.log(props.searchHistory);
+	if(props.searchHistory.length>0 && props.searchHistory.filter((history:any)=>history.symbol.includes(props.symbol))===0)
 	{props.dispatch(setSearchHistory([]))}
 
 	fetch(process.env.REACT_APP_HOST + apiRoutes.companyInfo + props.symbol)
