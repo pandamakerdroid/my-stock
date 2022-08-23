@@ -1,7 +1,6 @@
 import { 
 	//write operations
 	setSymbol,
-	setName,
 	setCurrency,
 	setInterval,
 	setRange,
@@ -12,14 +11,6 @@ import {
 	setVolume,
 	setBrowseHistory,
 	setSearchHistory,
-	setAsk,
-	setBid,
-	setEpsForward,
-	setEpsCurrentYear,
-	setFiftyTwoWeekLow,
-	setFiftyTwoWeekHigh,
-	setIpoExpectedDate,
-	setAverageAnalystRating,
 } from '@store/slices/stockDataSlice';
 
 const apiRoutes = {
@@ -37,15 +28,6 @@ export const fetchCompanyInfo = (props:any) => {
 
       //  add payload to the search history
 		props.dispatch(setSearchHistory(data))
-		props.dispatch(setName(data.name));
-		props.dispatch(setAsk(data.ask));
-		props.dispatch(setBid(data.bid));
-		props.dispatch(setEpsForward(data.epsForward));
-		props.dispatch(setEpsCurrentYear(data.epsCurrentYear));
-		props.dispatch(setFiftyTwoWeekLow(data.fiftyTwoWeekLow));
-		props.dispatch(setFiftyTwoWeekHigh(data.fiftyTwoWeekHigh));
-		props.dispatch(setIpoExpectedDate(data.ipoExpectedData));
-		props.dispatch(setAverageAnalystRating(data.averageAnalystRating));
 	})
 }
 
@@ -67,7 +49,6 @@ export const fetchQuote = (props:any) => {
 			props.dispatch(setPeriod2(data.period2))
 			props.dispatch(setQuote(data.quote))
 			props.dispatch(setVolume(data.volume))
-			props.dispatch(setBrowseHistory(data.symbol))
 		}
 		catch (e){
 			console.log("Oje, something is doesnt look good :)")

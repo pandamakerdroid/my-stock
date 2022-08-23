@@ -19,11 +19,10 @@ setSymbol,
 import { selectSearchText, setSearchText } from "../../store/slices/uiSlice";
 import { Box } from '@mui/system';
 import styles from './TickerAutoComplete.module.scss';
+import { setBrowseHistory } from "../../store/slices/stockDataSlice";
 
 const TickerAutoComplete = (props :any) => {
     const dispatch = useAppDispatch();
-    const searchText = useAppSelector(selectSearchText);
-    const symbol= useAppSelector(selectSymbol);
     const interval = useAppSelector(selectInterval);
     const range = useAppSelector(selectRange);
     const period1 = useAppSelector(selectPeriod1);
@@ -32,12 +31,13 @@ const TickerAutoComplete = (props :any) => {
     const {t} = useTranslation('translation');
       
     const handleChange = (e: any, newValue: any) => {
-    fetchQuote({symbol:newValue.symbol,
-        interval:interval,
-        period1:period1,
-        period2:period2,
-        range:range,
-        dispatch:dispatch})
+        dispatch(setBrowseHistory(newValue));
+        fetchQuote({symbol:newValue.symbol,
+            interval:interval,
+            period1:period1,
+            period2:period2,
+            range:range,
+            dispatch:dispatch})
     }
 
     return (
@@ -45,8 +45,6 @@ const TickerAutoComplete = (props :any) => {
             <Autocomplete
             id="ticker-search"
             sx={{margin:2}}
-            size="large"
-            open={true}
             options={searchHistory}
             filterOptions={(x) => x}
             getOptionLabel={(option) => (option && option.symbol) ? option.symbol:''}
@@ -80,7 +78,6 @@ const TickerAutoComplete = (props :any) => {
             }}
             renderOption={(props, option) => (         
                 <Box {...props} component="li" className={styles['ticker-auto-complete-opl']}>
-                    {console.log(props)}
                     <span className={styles.name}>{option.name}</span>
                     <span className={styles.ticker}> {option.symbol}</span>
                 </Box>
