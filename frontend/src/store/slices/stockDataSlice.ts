@@ -105,8 +105,6 @@ export const stockDataSlice = createSlice({
     },
     setSearchHistory: (state,action: PayloadAction<{}>) => {
       // if symbol is cleared, clear searchHistory
-      console.log("action.payload");
-      console.log(action.payload);
       if(Object.keys(action.payload).length === 0 ){
         console.log("lets clear searchHistory")
         state.searchHistory=[];

@@ -75,6 +75,7 @@ const TickerAutoComplete = (props :any) => {
             id="size-small-standard"
             size="small"
             options={searchHistory}
+            filterOptions={(x) => x}
             getOptionLabel={(option) => (option && option.symbol) ? option.symbol:''}
             onInputChange={(event: object, value: string, reason: string) => {
                 if (reason === 'input'){
@@ -85,20 +86,21 @@ const TickerAutoComplete = (props :any) => {
                     else if(value.length>=2){
                         dispatch(setSearchText(value));
                         if(searchHistory.length===0){
-                            console.log(11111);
+                            console.log("search history is empty, add");
+                            fetchCompanyInfo({symbol:value, dispatch:dispatch});
+                            return;
+                        }
+                        if(searchHistory.filter((history:any)=>value.includes(history.symbol)).length>0 &&
+                            searchHistory.filter((history:any)=>value===history.symbol).length===0){
+                            console.log("if search history element does not have same ticker and subset ticker exists, add");
                             fetchCompanyInfo({symbol:value, dispatch:dispatch});
                         }
-                        else if(searchHistory.filter((history:any)=>value===history.symbol).length===0){
-                            console.log(22222);
-                            fetchCompanyInfo({symbol:value, dispatch:dispatch});
-                        }
-                        else {
-                            console.log(33333);
+                        else if(searchHistory.filter((history:any)=>value.includes(history.symbol)).length===0){
+                            console.log("input a ticker that has no overlap with any existing ones, reset current history and create new one");
                             dispatch(setSearchHistory([]));
+                            fetchCompanyInfo({symbol:value, dispatch:dispatch});
                         }
                     }
-                    console.log(value);
-                    console.log(searchHistory);
                 }
 
             }}
@@ -108,8 +110,6 @@ const TickerAutoComplete = (props :any) => {
                     variant="standard"
                     label="Search"
                     placeholder="by ticker"
-                    //onChange={handleChange}
-                    //onKeyUp={handleOnKeyUp}
                 />
             )}
             />

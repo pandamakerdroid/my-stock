@@ -33,7 +33,7 @@ export const fetchCompanyInfo = (props:any) => {
 	.then(response => response.json())
 	.then(data => {
 		console.log(data);
-		if(!data.name || !data.ask || !data.bid){return;} //filter out 404 and seaweeds
+		if(!data.name || !data.hasOwnProperty('ask') || !data.hasOwnProperty('bid')){return;} //filter out 404 and seaweeds
 
       //  add payload to the search history
 		props.dispatch(setSearchHistory(data))
