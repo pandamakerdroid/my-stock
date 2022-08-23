@@ -77,12 +77,30 @@ const TickerAutoComplete = (props :any) => {
             options={searchHistory}
             getOptionLabel={(option) => (option && option.symbol) ? option.symbol:''}
             onInputChange={(event: object, value: string, reason: string) => {
-                if (reason === 'input' && value.length>=2) {
+                if (reason === 'input'){
+                    if(value.length===0){
+                        dispatch(setSearchText(value));
+                        dispatch(setSearchHistory([]));
+                    }
+                    else if(value.length>=2){
+                        dispatch(setSearchText(value));
+                        if(searchHistory.length===0){
+                            console.log(11111);
+                            fetchCompanyInfo({symbol:value, dispatch:dispatch});
+                        }
+                        else if(searchHistory.filter((history:any)=>value===history.symbol).length===0){
+                            console.log(22222);
+                            fetchCompanyInfo({symbol:value, dispatch:dispatch});
+                        }
+                        else {
+                            console.log(33333);
+                            dispatch(setSearchHistory([]));
+                        }
+                    }
                     console.log(value);
-                    dispatch(setSearchText(value));
-                    fetchCompanyInfo({symbol:value, searchHistory:searchHistory, dispatch:dispatch});
                     console.log(searchHistory);
                 }
+
             }}
             renderInput={(params) => (
                 <TextField
@@ -90,8 +108,8 @@ const TickerAutoComplete = (props :any) => {
                     variant="standard"
                     label="Search"
                     placeholder="by ticker"
-                    onChange={handleChange}
-                    onKeyUp={handleOnKeyUp}
+                    //onChange={handleChange}
+                    //onKeyUp={handleOnKeyUp}
                 />
             )}
             />

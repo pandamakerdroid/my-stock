@@ -1,5 +1,5 @@
 {
-    "compilerOptions":{
+    "compilerOptions": {
         "baseUrl": ".",
         "paths": {
             "@api": ["src/api"],
@@ -10,7 +10,7 @@
             "@components": ["src/shared/components"],
             "@partials": ["src/shared/partials"],
             "@shared": ["src/shared"],
-            "@utils": ["src/shared/utils"],
+            "@utils": ["src/shared/utils"]
         }
     }
 }
