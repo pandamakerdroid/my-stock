@@ -8,6 +8,9 @@
             {"name":"联系我们","href":"/contact"}],
         "menu-items":["Profile","Account","Dashboard","Logout"]
     },
+    "list-panel":{
+        "browse-history":"浏览记录"
+    },
     "buttons":{
         "search": "搜索"
     },

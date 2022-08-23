@@ -8,6 +8,9 @@
             {"name":"Contact","href":"/contact"}],
         "menu-items":["Profile","Account","Dashboard","Logout"]
     },
+    "list-panel":{
+        "browse-history":"Browse History"
+    },
     "buttons":{
         "search": "Search"
     },

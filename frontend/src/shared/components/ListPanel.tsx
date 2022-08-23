@@ -1,11 +1,13 @@
 import { Box,
+         Divider,
          Drawer,
          List,
          ListItem,
          ListItemButton,
          Toolbar,
-         ListItemText,
+         Typography
         } from "@mui/material";
+
 import { fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from '@store/hooks';
@@ -63,6 +65,10 @@ function ListPanel() {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
           <TickerAutoComplete/>
+          <Typography variant="body1" sx={{textTransform:'uppercase',fontSize:'0.7rem',fontWeight:500}} gutterBottom>
+            {t('list-panel.browse-history')}
+          </Typography>
+          <Divider sx={{marginX:"1rem"}}/>
           <List>
             {browseHistory.map((history:any, index:number) => (
               <ListItem key={history.symbol} disablePadding>

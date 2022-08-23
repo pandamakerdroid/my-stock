@@ -14,6 +14,7 @@ import {
 	selectPeriod2,
 	selectQuote,
     selectVolume,
+    selectBrowseHistory,
 } from '@store/slices/stockDataSlice';
 
 const MyStocks = (props:{}) => {
@@ -27,6 +28,7 @@ const MyStocks = (props:{}) => {
     const period2 = useAppSelector(selectPeriod2);
     const quote = useAppSelector(selectQuote);
     const volume = useAppSelector(selectVolume);
+    const browseHistory = useAppSelector(selectBrowseHistory);
 
     const chartRef = useRef(null);
     const updateChart = () => {
