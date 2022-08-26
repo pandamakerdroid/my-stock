@@ -16,5 +16,13 @@
     },
     "labels":{
         "search-field":"Search Field"
+    },
+    "overview":{
+        "bid":"Bid",
+        "ask":"Ask",
+        "fiftyTwoWeekHigh":"52 Weeks High",
+        "fiftyTwoWeekLow":"52 Weeks Low",
+        "epsCurrentYear":"EPS Current Year",
+        "epsForward":"EPS Forward"
     }
 }
