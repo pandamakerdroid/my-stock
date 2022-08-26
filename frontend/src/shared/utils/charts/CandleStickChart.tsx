@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 function CandleStickChart(props:any) {
 
     setTimeout(() =>{
@@ -95,7 +93,7 @@ function CandleStickChart(props:any) {
                 yAxis: 2
             }]
         })
-    },(props.quote.length===0?500:0))
+    },(props.quote.length===0?500:300))
 
   
     return <>
