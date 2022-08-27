@@ -15,15 +15,19 @@ export const Overview = (props:any) => {
         
         <>
 
-            <Typography variant="h4" gutterBottom>
-                {symbol.length>1?props.stock.name:''}
-            </Typography>
-            <Typography variant="subtitle1">
-                {symbol.length>1?props.stock.symbol:''}
-            </Typography>
-            <Typography variant="subtitle1" gutterBottom>
-                {symbol.length>1?props.stock.averageAnalystRating:""}
-            </Typography>      
+            <Grid container spacing={2} sx={{mt:5}}>
+                <Grid item md={12} xs={12}>
+                    <Typography variant="h4" gutterBottom>
+                        {symbol.length>1?props.stock.name:''}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        {symbol.length>1?props.stock.symbol:''}
+                    </Typography>
+                    <Typography variant="subtitle1" gutterBottom>
+                        {symbol.length>1?props.stock.averageAnalystRating:""}
+                    </Typography>  
+                </Grid>
+            </Grid>    
             <Grid container spacing={2}>
                 <Grid item md={3} xs={6}>
                     <Typography variant="h6" gutterBottom>
@@ -57,6 +61,26 @@ export const Overview = (props:any) => {
                     {symbol.length>1?props.stock.fiftyTwoWeekLow:0}
                     </Typography>
                 </Grid>
+                {(symbol.length>1 && props.stock.epsForward) &&
+                    <>
+                        <Grid item md={3} xs={6}>
+                            <Typography variant="h6" gutterBottom>
+                            {t('overview.epsCurrentYear')}
+                            </Typography>   
+                            <Typography variant="subtitle1" gutterBottom>
+                            {symbol.length>1?props.stock.epsCurrentYear:0}
+                            </Typography>
+                        </Grid>
+                        <Grid item md={3} xs={6}>
+                            <Typography variant="h6" gutterBottom>
+                            {t('overview.epsForward')}
+                            </Typography>  
+                            <Typography variant="subtitle1" gutterBottom>
+                            {symbol.length>1?props.stock.epsForward:0}
+                            </Typography>
+                        </Grid>
+                    </>
+                }
             </Grid>
         </>
     )
