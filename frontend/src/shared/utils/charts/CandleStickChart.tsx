@@ -1,6 +1,9 @@
+import {useEffect} from 'react';
+
 function CandleStickChart(props:any) {
 
-    setTimeout(() =>{
+    useEffect(() => {
+
         (Highcharts as any).stockChart('container', {
             chart: {
                 height: 600,
@@ -93,7 +96,7 @@ function CandleStickChart(props:any) {
                 yAxis: 2
             }]
         })
-    },(props.quote.length===0?500:300))
+    }, [props.quote])
 
   
     return <>

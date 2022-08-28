@@ -6,6 +6,7 @@ export interface stockDataState {
   name: string,
   currency: string,
   interval: string, //1h,1d,1d,1w etc.
+  intervalList:Array<string>,
   range: string,
   validRanges: {},
   period1: number, //timestamp start
@@ -21,6 +22,7 @@ export const initialState: stockDataState = {
   name: '',
   currency: 'USD',
   interval: '1h', //1h,1d,1d,1w etc.
+  intervalList:['5m','15m','1h','4h','1d','1w','1mo'],
   range: '',
   validRanges: [],
   period1: Math.round(new Date().setDate(new Date().getDate() - 30)/1000), //timestamp start
@@ -143,6 +145,7 @@ export const selectSymbol = (state: RootState) => state.stockData.symbol;
 export const selectName = (state: RootState) => state.stockData.name;
 export const selectCurrency = (state:RootState)=>state.stockData.currency;
 export const selectInterval = (state:RootState)=>state.stockData.interval;
+export const selectIntervalList = (state:RootState)=>state.stockData.intervalList;
 export const selectRange = (state:RootState)=>state.stockData.range;
 export const selectValidRanges = (state:RootState)=>state.stockData.validRanges;
 export const selectPeriod1 = (state:RootState)=>state.stockData.period1;
