@@ -8,7 +8,7 @@ export interface stockDataState {
   interval: string, //1h,1d,1d,1w etc.
   intervalList:Array<string>,
   range: string,
-  validRanges: {},
+  validRanges: Array<string>,
   period1: number, //timestamp start
   period2: number, //timestamp end
   quote: [],
@@ -24,7 +24,7 @@ export const initialState: stockDataState = {
   interval: '1h', //1h,1d,1d,1w etc.
   intervalList:['5m','15m','1h','4h','1d','1w','1mo'],
   range: '',
-  validRanges: [],
+  validRanges: ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'],
   period1: Math.round(new Date().setDate(new Date().getDate() - 30)/1000), //timestamp start
   period2: Math.round(Date.now()/1000), //timestamp end
   quote: [],
@@ -93,7 +93,7 @@ export const stockDataSlice = createSlice({
     setSearchHistory: (state,action: PayloadAction<{}>) => {
       // if symbol is cleared, clear searchHistory
       if(Object.keys(action.payload).length === 0 ){
-        console.log("lets clear searchHistory")
+        console.log('lets clear searchHistory')
         state.searchHistory=[];
         return;
       }
