@@ -8,7 +8,6 @@ const PeriodSelectors = () => {
             <IntervalSelector />
             <DateSelector id="p1"/>
             <DateSelector id="p2"/>
-
         </Grid>
     )
 }
