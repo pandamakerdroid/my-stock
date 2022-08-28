@@ -20,11 +20,11 @@ export const initialState: stockDataState = {
   symbol: '',
   name: '',
   currency: 'USD',
-  interval: '1d', //1h,1d,1d,1w etc.
-  range: 'max',
+  interval: '1h', //1h,1d,1d,1w etc.
+  range: '',
   validRanges: [],
-  period1: new Date().setDate(new Date().getDate() - 30), //timestamp start
-  period2: Date.now(), //timestamp end
+  period1: Math.round(new Date().setDate(new Date().getDate() - 30)/1000), //timestamp start
+  period2: Math.round(Date.now()/1000), //timestamp end
   quote: [],
   volume: [],
   browseHistory: [],

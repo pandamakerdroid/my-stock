@@ -16,5 +16,13 @@
     },
     "labels":{
         "search-field":"搜索栏"
+    },
+    "overview":{
+        "bid":"卖出价",
+        "ask":"买入价",
+        "fiftyTwoWeekHigh":"52周高价",
+        "fiftyTwoWeekLow":"52周低价",
+        "epsCurrentYear":"当年每股盈利",
+        "epsForward":"未来每股盈利预估"
     }
 }

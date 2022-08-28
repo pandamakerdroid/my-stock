@@ -16,6 +16,7 @@ import {
     selectVolume,
     selectBrowseHistory,
 } from '@store/slices/stockDataSlice';
+import { Overview } from "../shared/partials/Overview";
 
 const MyStocks = (props:{}) => {
     const [input, setInput] = useState("");
@@ -44,6 +45,10 @@ const MyStocks = (props:{}) => {
                 <ListPanel></ListPanel>
             </Grid>
             <Grid item sm={12} md={9}>
+                <Overview stock={
+                    browseHistory.filter((stock:any)=>stock.symbol===symbol)[0]
+                }/>
+                <Charts.PeriodSelectors/>
                 <Charts.CandleStickChart
                     symbol={symbol}
                     currency = {currency}

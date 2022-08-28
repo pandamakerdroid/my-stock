@@ -16,10 +16,10 @@ selectSearchHistory,
 setSearchHistory,
 setSymbol,
 } from '@store/slices/stockDataSlice';
-import { selectSearchText, setSearchText } from "../../store/slices/uiSlice";
+import { selectSearchText, setSearchText } from "@store/slices/uiSlice";
 import { Box } from '@mui/system';
 import styles from './TickerAutoComplete.module.scss';
-import { setBrowseHistory } from "../../store/slices/stockDataSlice";
+import { setBrowseHistory } from "@store/slices/stockDataSlice";
 
 const TickerAutoComplete = (props :any) => {
     const dispatch = useAppDispatch();
@@ -31,13 +31,16 @@ const TickerAutoComplete = (props :any) => {
     const {t} = useTranslation('translation');
       
     const handleChange = (e: any, newValue: any) => {
-        dispatch(setBrowseHistory(newValue));
-        fetchQuote({symbol:newValue.symbol,
-            interval:interval,
-            period1:period1,
-            period2:period2,
-            range:range,
-            dispatch:dispatch})
+        if(newValue && newValue.symbol.length>1){
+            dispatch(setBrowseHistory(newValue));
+            fetchQuote({symbol:newValue.symbol,
+                interval:interval,
+                period1:period1,
+                period2:period2,
+                range:range,
+                dispatch:dispatch})
+        }
+
     }
 
     return (
@@ -51,6 +54,7 @@ const TickerAutoComplete = (props :any) => {
             onChange={handleChange}
             onInputChange={(event: object, value: string, reason: string) => {
                 if (reason === 'input'){
+                    value=value.toUpperCase();
                     if(value.length===0){
                         dispatch(setSearchText(value));
                         dispatch(setSearchHistory([]));
