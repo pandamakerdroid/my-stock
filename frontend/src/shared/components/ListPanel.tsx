@@ -41,7 +41,7 @@ function ListPanel() {
   const {t} = useTranslation('translation');
 
   const handleClick = (e:any) => {
-    const historySymbol = (e.target.id && e.target.id!='')?e.target.id:e.target.innerText
+    const historySymbol = (e.target.id && e.target.id!=='')?e.target.id:e.target.innerText
     if(historySymbol !== symbol){
       dispatch(setSearchText(historySymbol));
       dispatch(setSymbol(historySymbol));

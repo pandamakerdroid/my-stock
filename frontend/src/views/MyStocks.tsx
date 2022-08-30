@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material";
 import ListPanel from '@components/ListPanel';
 import Charts from "@utils/charts";
-import { useState, useRef } from "react";
 import { useAppSelector } from '@store/hooks';
 import { 
 	//read operations
@@ -19,7 +18,6 @@ import {
 import { Overview } from "../shared/partials/Overview";
 
 const MyStocks = (props:{}) => {
-    const [input, setInput] = useState("");
     const symbol = useAppSelector(selectSymbol);
     const currency = useAppSelector(selectCurrency);
     const interval = useAppSelector(selectInterval);
@@ -31,12 +29,12 @@ const MyStocks = (props:{}) => {
     const volume = useAppSelector(selectVolume);
     const browseHistory = useAppSelector(selectBrowseHistory);
 
-    const chartRef = useRef(null);
+    /*const chartRef = useRef(null);
     const updateChart = () => {
       chartRef.current.chart.series[1].update({
         name: input
       });
-    };
+    };*/
 
     return (
 

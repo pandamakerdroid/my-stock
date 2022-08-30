@@ -19,7 +19,6 @@ import { useAppSelector, useAppDispatch } from '@store/hooks';
 import i18next from 'i18next';
 
 import { Link } from 'react-router-dom';
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
 const Header = () => {
