@@ -96,7 +96,7 @@ function CandleStickChart(props:any) {
                 yAxis: 2
             }]
         })
-    }, [props.quote])
+    }, [props.quote, props.symbol, props.volume])
 
   
     return <>
