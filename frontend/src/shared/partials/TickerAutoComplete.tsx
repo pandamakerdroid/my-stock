@@ -88,7 +88,7 @@ const TickerAutoComplete = (props :any) => {
                 <TextField
                     {...params}
                     variant="standard"
-                    label="Search"
+                    label={t('buttons.search')}
                     placeholder="by ticker"
                 />
             )}
