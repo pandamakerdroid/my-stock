@@ -43,6 +43,7 @@ stages:
 
     - script: |
         cd frontend
+        mv .env.dev .env
         npm install --force
         npm run build --if-present
         #npm run test --if-present #no tests for now, skip
