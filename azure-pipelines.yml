@@ -30,7 +30,7 @@ stages:
 - stage: Build
   displayName: Build stage
   jobs:
-  - job: Build-Frontend
+  - job: Build_Frontend
     displayName: Build Frontend
     pool:
       vmImage: $(vmImageName)
@@ -61,7 +61,7 @@ stages:
       artifact: drop
 
   - job: Build-Backend
-    displayName: Build Backend
+    displayName: Build_Frontend
     pool:
       vmImage: $(vmImageName)
 
