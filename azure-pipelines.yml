@@ -60,8 +60,8 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-frontend.zip
       artifact: drop
 
-  - job: Build-Backend
-    displayName: Build_Frontend
+  - job: Build_Backend
+    displayName: Build Frontend
     pool:
       vmImage: $(vmImageName)
 
