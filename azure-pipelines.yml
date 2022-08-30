@@ -69,7 +69,7 @@ stages:
       artifact: drop1
 
   - job: Build_Backend
-    displayName: Build Frontend
+    displayName: Build Backend
     pool:
       vmImage: $(vmImageName)
 
