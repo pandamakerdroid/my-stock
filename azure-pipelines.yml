@@ -107,9 +107,6 @@ stages:
             displayName: 'Deploy Frontend to Azure Static Web App:'
             inputs:
               workingDirectory: '$(System.DefaultWorkingDirectory)/frontend/'
-              app_build_command: |
-                npm install
-                npm run build --if-present
               output_location: 'build'
               verbose: true
               skip_api_build: true
