@@ -58,7 +58,7 @@ stages:
         replaceExistingArchive: true
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-frontend.zip
-      artifact: drop
+      artifact: drop1
 
   - job: Build_Backend
     displayName: Build Frontend
@@ -87,7 +87,7 @@ stages:
         replaceExistingArchive: true
 
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-backend.zip
-      artifact: drop
+      artifact: drop2
 
 - stage: Deploy
   displayName: Deploy stage
