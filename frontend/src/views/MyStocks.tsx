@@ -48,6 +48,7 @@ const MyStocks = (props:{}) => {
                 <Overview stock={
                     browseHistory.filter((stock:any)=>stock.symbol===symbol)[0]
                 }/>
+                <Charts.PeriodSelectors/>
                 <Charts.CandleStickChart
                     symbol={symbol}
                     currency = {currency}

@@ -35,6 +35,9 @@ const getCompanyBasicInfo = (req,res) => {
 
 const getQuote = (req,res) =>{
     // LET ME ASSUME (FOR THE TIME BEING) THAT YOU ARE ALL GOOD GUYS THAT WONT SEND NONSENSE TO THE BACKEND LOL!!
+    console.log(apiEndpoints.host + apiEndpoints.chart +
+        req.params.symbol +
+        (url.parse(req.url,true).search?url.parse(req.url,true).search:''));
     https.get(apiEndpoints.host + apiEndpoints.chart +
                req.params.symbol +
                (url.parse(req.url,true).search?url.parse(req.url,true).search:''), (resp) => {

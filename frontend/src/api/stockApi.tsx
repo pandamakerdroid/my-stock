@@ -36,7 +36,9 @@ export const fetchQuote = (props:any) => {
 
 	fetch(process.env.REACT_APP_HOST+apiRoutes.quote + props.symbol+'?events=div%7Csplit'+
 	'&interval='+props.interval+
-	'&range='+props.range)
+	(props.range && props.range !=''?'&range='+props.range:'')+
+	'&period1='+props.period1+
+	'&period2='+props.period2)
 	.then(response => response.json())
 	.then(data => {
 		try {

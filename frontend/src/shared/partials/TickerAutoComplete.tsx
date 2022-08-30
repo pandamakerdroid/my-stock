@@ -54,6 +54,7 @@ const TickerAutoComplete = (props :any) => {
             onChange={handleChange}
             onInputChange={(event: object, value: string, reason: string) => {
                 if (reason === 'input'){
+                    value=value.toUpperCase();
                     if(value.length===0){
                         dispatch(setSearchText(value));
                         dispatch(setSearchHistory([]));
