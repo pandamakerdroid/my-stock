@@ -26,11 +26,13 @@ variables:
   # Node Version
   nodeVersion: '18.X'
 stages:
+
+stages:
 - stage: Build
   displayName: Build stage
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Build-Frontend
+    displayName: Build Frontend
     pool:
       vmImage: $(vmImageName)
 
@@ -45,6 +47,32 @@ stages:
         npm install --force
         npm run build --if-present
         #npm run test --if-present #no tests for now, skip
+      displayName: 'npm install, build and test react frontend'
+
+    - task: ArchiveFiles@2
+      displayName: 'Archive Frontend'
+      inputs:
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/frontend/build'
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-frontend.zip
+        replaceExistingArchive: true
+
+    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-frontend.zip
+      artifact: drop
+
+  - job: Build-Backend
+    displayName: Build Backend
+    pool:
+      vmImage: $(vmImageName)
+
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: $(nodeVersion)
+      displayName: 'Install Node.js'
+
+    - script: |
         cd backend
         npm install
         #npm run test --if-present
@@ -53,13 +81,13 @@ stages:
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+        rootFolderOrFile: '$(System.DefaultWorkingDirectory)/backend'
         includeRootFolder: false
         archiveType: zip
-        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).z
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-backend.zip
         replaceExistingArchive: true
 
-    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-backend.zip
       artifact: drop
 
 - stage: Deploy
@@ -83,5 +111,5 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               runtimeStack: 'NODE|''$(nodeVersion)'
-              package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+              package: $(Pipeline.Workspace)/drop/$(Build.BuildId)-backend.zip
               startUpCommand: 'npm run start'
