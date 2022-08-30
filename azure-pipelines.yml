@@ -94,8 +94,8 @@ stages:
   dependsOn: Build
   condition: succeeded()
   jobs:
-  - deployment: Deploy
-    displayName: Deploy
+  - deployment: Deploy_Backend
+    displayName: Deploy Backend
     environment: $(environmentName)
     pool:
       vmImage: $(vmImageName)
@@ -110,5 +110,5 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               runtimeStack: 'NODE|''$(nodeVersion)'
-              package: $(Pipeline.Workspace)/drop/$(Build.BuildId)-backend.zip
+              package: $(Pipeline.Workspace)/drop2/$(Build.BuildId)-backend.zip
               startUpCommand: 'npm run start'
