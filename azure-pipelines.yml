@@ -106,7 +106,7 @@ stages:
           - task: AzureStaticWebApp@0
             displayName: 'Deploy Frontend to Azure Static Web App: '
             inputs:
-              app_location: frontend/wwwroot
+              app_location: wwwroot
               api_location: api
               skip_app_build: true
               skip_api_build: true
