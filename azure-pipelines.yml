@@ -94,6 +94,27 @@ stages:
   dependsOn: Build
   condition: succeeded()
   jobs:
+  - deployment: Deploy_Frontend
+    displayName: Deploy Frontend
+    environment: $(environmentName)
+    pool:
+      vmImage: $(vmImageName)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureStaticWebApp@0
+            displayName: 'Deploy Frontend to Azure Static Web App: '
+            inputs:
+              app_location: frontend/wwwroot
+              api_location: api
+              skip_app_build: true
+              skip_api_build: true
+              verbose: true
+              azure_static_web_apps_api_token: $(deployment_token)
+              deployment_environment: Production
+              workingDirectory: $(System.ArtifactsDirectory)/drop1
+              
   - deployment: Deploy_Backend
     displayName: Deploy Backend
     environment: $(environmentName)
