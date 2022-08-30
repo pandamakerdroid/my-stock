@@ -1,5 +1,5 @@
 import { Typography, Grid, Item } from '@mui/material';
-import styles from '@partials/Overview.module.css';
+//import styles from '@partials/Overview.module.css';
 import {
     selectSymbol
 } from '@store/slices/stockDataSlice';

@@ -7,16 +7,14 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { 
 //read operations
-selectSymbol,
 selectInterval,
 selectRange,
 selectPeriod1,
 selectPeriod2,
 selectSearchHistory,
 setSearchHistory,
-setSymbol,
 } from '@store/slices/stockDataSlice';
-import { selectSearchText, setSearchText } from "@store/slices/uiSlice";
+import { setSearchText } from "@store/slices/uiSlice";
 import { Box } from '@mui/system';
 import styles from './TickerAutoComplete.module.scss';
 import { setBrowseHistory } from "@store/slices/stockDataSlice";
