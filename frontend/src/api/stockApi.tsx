@@ -4,7 +4,6 @@ import {
 	setCurrency,
 	setInterval,
 	setRange,
-	setValidRanges,
 	setPeriod1,
 	setPeriod2,
 	setQuote,
@@ -45,7 +44,6 @@ export const fetchQuote = (props:any) => {
 			props.dispatch(setCurrency(data.currency))
 			props.dispatch(setInterval(data.granularity))
 			props.dispatch(setRange(data.range))
-			props.dispatch(setValidRanges(data.validaRanges))
 			props.dispatch(setPeriod1(data.period1))
 			props.dispatch(setPeriod2(data.period2))
 			props.dispatch(setQuote(data.quote))

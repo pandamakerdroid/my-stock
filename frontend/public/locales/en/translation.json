@@ -36,6 +36,7 @@
                 { "1w": "1w" },
                 { "1mo": "1mo" }
             ],
+            "range": "Range",
             "period1": "Start Date",
             "period2": "End Date"
         }

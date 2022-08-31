@@ -3,6 +3,7 @@ import { selectPeriod1,
          selectPeriod2,
          selectInterval,
          selectSymbol,
+         selectRange,
          setPeriod1,
          setPeriod2
         } from "@store/slices/stockDataSlice";
@@ -19,6 +20,7 @@ const DateSelector = (props:any) => {
     const {t} = useTranslation('translation');
 
     const dispatch = useAppDispatch();
+    const range = useAppSelector(selectRange);
     const symbol = useAppSelector(selectSymbol);
     const interval = useAppSelector(selectInterval);
     const period1 = useAppSelector(selectPeriod1);
@@ -40,6 +42,7 @@ const DateSelector = (props:any) => {
         }
         fetchQuote({symbol:symbol,
             interval:interval,
+            range:range,
             period1:props.id==='p1'?newValue?.unix():period1,
             period2:props.id==='p2'?newValue?.unix():period2,
             dispatch:dispatch})
@@ -58,6 +61,6 @@ const DateSelector = (props:any) => {
                 renderInput={(params) => <TextField {...params} />}
             />
         </LocalizationProvider>
-)
+    )
 }
 export default DateSelector;

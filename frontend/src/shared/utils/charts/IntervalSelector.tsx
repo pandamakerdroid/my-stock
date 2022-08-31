@@ -1,6 +1,7 @@
 import { selectInterval,
          selectIntervalList,
          setInterval,
+         selectRange,
          selectSymbol,
          selectPeriod1,
          selectPeriod2
@@ -19,6 +20,7 @@ const IntervalSelector = () => {
     const dispatch = useAppDispatch();
     const period1 = useAppSelector(selectPeriod1);
     const period2 = useAppSelector(selectPeriod2);
+    const range = useAppSelector(selectRange);
     const symbol= useAppSelector(selectSymbol)
     const interval = useAppSelector(selectInterval);
     const intervalList = useAppSelector(selectIntervalList)
@@ -26,6 +28,7 @@ const IntervalSelector = () => {
         dispatch(setInterval(newValue.target.value));
         fetchQuote({symbol:symbol,
             interval:newValue.target.value,
+            range:range,
             period1:period1,
             period2:period2,
             dispatch:dispatch})

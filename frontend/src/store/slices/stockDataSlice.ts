@@ -23,7 +23,7 @@ export const initialState: stockDataState = {
   currency: 'USD',
   interval: '1h', //1h,1d,1d,1w etc.
   intervalList:['5m','15m','1h','4h','1d','1w','1mo'],
-  range: '',
+  range: '6mo',
   validRanges: ['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y', '5y', '10y', 'ytd', 'max'],
   period1: Math.round(new Date().setDate(new Date().getDate() - 30)/1000), //timestamp start
   period2: Math.round(Date.now()/1000), //timestamp end
