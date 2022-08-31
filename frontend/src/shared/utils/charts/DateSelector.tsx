@@ -45,14 +45,14 @@ const DateSelector = (props:any) => {
             dispatch:dispatch})
     };
     let value = props.id==="p1"?
-        dayjs.unix(period1).format('MM-DD-YYYY'):
-        dayjs.unix(period2).format('MM-DD-YYYY');
+        dayjs.unix(period1).locale(t('locale')).format():
+        dayjs.unix(period2).locale(t('locale')).format();
     let label = props.id==="p1"?t('overview.selectors.period1'):t('overview.selectors.period2');
     return(
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <MobileDatePicker
                 label={label}
-                inputFormat="MM-DD-YYYY"
+                inputFormat={t('dateFormat')}
                 value={value}
                 onChange={handleChange}
                 renderInput={(params) => <TextField {...params} />}

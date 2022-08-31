@@ -1,42 +1,45 @@
 {
-    "title":"我的股票",
-    "nav":{
-        "nav-items":[
-            {"name":"股票","href":"/stocks"},
-            {"name":"加密货币","href":"/cryptos"},
-            {"name":"常见问题集锦(English ONLY!)","href":"/faq"},
-            {"name":"联系我们","href":"/contact"}],
-        "menu-items":["Profile","Account","Dashboard","Logout"]
+    "title": "我的股票",
+    "nav": {
+        "nav-items": [
+            { "name": "股票", "href": "/stocks" },
+            { "name": "加密货币", "href": "/cryptos" },
+            { "name": "常见问题集锦(English ONLY!)", "href": "/faq" },
+            { "name": "联系我们", "href": "/contact" }
+        ],
+        "menu-items": ["Profile", "Account", "Dashboard", "Logout"]
     },
-    "list-panel":{
-        "browse-history":"浏览记录"
+    "list-panel": {
+        "browse-history": "浏览记录"
     },
-    "buttons":{
+    "buttons": {
         "search": "搜索"
     },
-    "labels":{
-        "search-field":"搜索栏"
+    "labels": {
+        "search-field": "搜索栏"
     },
-    "overview":{
-        "bid":"卖出价",
-        "ask":"买入价",
-        "fiftyTwoWeekHigh":"52周高价",
-        "fiftyTwoWeekLow":"52周低价",
-        "epsCurrentYear":"当年每股盈利",
-        "epsForward":"未来每股盈利预估",
-        "selectors":{
-            "interval-label":"K线区间",
-            "intervals":[
-                {"5m":"5分"},
-                {"15m":"15分"},
-                {"1h":"1小时"},
-                {"4h":"4小时"},
-                {"1d":"日K"},
-                {"1w":"周K"},
-                {"1mo":"月K"}
+    "overview": {
+        "bid": "卖出价",
+        "ask": "买入价",
+        "fiftyTwoWeekHigh": "52周高价",
+        "fiftyTwoWeekLow": "52周低价",
+        "epsCurrentYear": "当年每股盈利",
+        "epsForward": "未来每股盈利预估",
+        "selectors": {
+            "interval-label": "K线区间",
+            "intervals": [
+                { "5m": "5分" },
+                { "15m": "15分" },
+                { "1h": "1小时" },
+                { "4h": "4小时" },
+                { "1d": "日K" },
+                { "1w": "周K" },
+                { "1mo": "月K" }
             ],
-            "period1":"开始日期",
-            "period2":"结束日期"
+            "period1": "开始日期",
+            "period2": "结束日期"
         }
-    }
+    },
+    "locale": "zh-cn",
+    "dateFormat": "YYYY-MM-DD"
 }
