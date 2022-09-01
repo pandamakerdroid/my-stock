@@ -46,8 +46,9 @@ const RangeSelector = () => {
                 <MenuItem key={range} value={range}>{range}</MenuItem>)
             }
         </Select>
-        <FormHelperText>Range</FormHelperText>
+        <FormHelperText>{t('overview.selectors.range')}</FormHelperText>
       </FormControl>
     )
 }
-export default RangeSelector
+
+export default RangeSelector;
