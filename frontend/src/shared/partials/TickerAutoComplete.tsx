@@ -6,12 +6,14 @@ import { fetchCompanyInfo, fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
 import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { 
-//read operations
+// read operations
+selectSymbol,
 selectInterval,
 selectRange,
 selectPeriod1,
 selectPeriod2,
 selectSearchHistory,
+// write operations
 setSearchHistory,
 } from '@store/slices/stockDataSlice';
 import { setSearchText } from "@store/slices/uiSlice";
@@ -26,10 +28,12 @@ const TickerAutoComplete = (props :any) => {
     const period1 = useAppSelector(selectPeriod1);
     const period2 = useAppSelector(selectPeriod2);
     const searchHistory = useAppSelector(selectSearchHistory);
+    const symbol = useAppSelector(selectSymbol);
     const {t} = useTranslation('translation');
-      
+
     const handleChange = (e: any, newValue: any) => {
-        if(newValue && newValue.symbol.length>1){
+        console.log(newValue)
+        if(newValue && newValue.symbol.length>=2){
             dispatch(setBrowseHistory(newValue));
             fetchQuote({symbol:newValue.symbol,
                 interval:interval,
@@ -51,8 +55,9 @@ const TickerAutoComplete = (props :any) => {
             getOptionLabel={(option) => (option && option.symbol) ? option.symbol:''}
             onChange={handleChange}
             onInputChange={(event: object, value: string, reason: string) => {
+                console.log(value)
                 if (reason === 'input'){
-                    value=value.toUpperCase();
+                    value = value.toUpperCase();
                     if(value.length===0){
                         dispatch(setSearchText(value));
                         dispatch(setSearchHistory([]));

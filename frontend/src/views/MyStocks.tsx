@@ -14,6 +14,7 @@ import {
 	selectQuote,
     selectVolume,
     selectBrowseHistory,
+    selectSearchHistory,
 } from '@store/slices/stockDataSlice';
 import { Overview } from "../shared/partials/Overview";
 
@@ -28,6 +29,7 @@ const MyStocks = (props:{}) => {
     const quote = useAppSelector(selectQuote);
     const volume = useAppSelector(selectVolume);
     const browseHistory = useAppSelector(selectBrowseHistory);
+    const searchHistory = useAppSelector(selectSearchHistory);
 
     /*const chartRef = useRef(null);
     const updateChart = () => {
@@ -44,7 +46,10 @@ const MyStocks = (props:{}) => {
             </Grid>
             <Grid item sm={12} md={9}>
                 <Overview stock={
-                    browseHistory.filter((stock:any)=>stock.symbol===symbol)[0]
+                    browseHistory.filter((stock:any)=>stock.symbol===symbol)[0] &&
+                    browseHistory.filter((stock:any)=>stock.symbol===symbol)[0]?
+                    browseHistory.filter((stock:any)=>stock.symbol===symbol)[0]:
+                    searchHistory.filter((stock:any)=>stock.symbol===symbol)[0]
                 }/>
                 <Charts.PeriodSelectors/>
                 <Charts.CandleStickChart
