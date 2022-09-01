@@ -50,12 +50,14 @@ const TickerAutoComplete = (props :any) => {
             <Autocomplete
             id="ticker-search"
             sx={{margin:2}}
+            freeSolo={true}
+            clearOnEscape={true}
             options={searchHistory}
             filterOptions={(x) => x}
             getOptionLabel={(option) => (option && option.symbol) ? option.symbol:''}
             onChange={handleChange}
             onInputChange={(event: object, value: string, reason: string) => {
-                console.log(value)
+                console.log(event)
                 if (reason === 'input'){
                     value = value.toUpperCase();
                     if(value.length===0){
