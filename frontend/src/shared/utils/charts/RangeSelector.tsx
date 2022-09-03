@@ -1,7 +1,7 @@
 import { selectInterval,
          selectRange,
          selectValidRanges,
-         setInterval,
+         setRange,
          selectSymbol,
          selectPeriod1,
          selectPeriod2
@@ -24,7 +24,7 @@ const RangeSelector = () => {
     const range = useAppSelector(selectRange);
     const validRanges = useAppSelector(selectValidRanges)
     const handleChange = (event: SelectChangeEvent) => {
-        dispatch(setInterval(event.target.value));
+        dispatch(setRange(event.target.value));
         fetchQuote({symbol:symbol,
             range:event.target.value,
             interval:interval,
