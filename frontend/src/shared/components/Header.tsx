@@ -157,8 +157,13 @@ const Header = () => {
             ))}
           </Box>
 
-          <Box sx={{width: { xs: 40 },"& .MuiInputBase-root": {height: 80}, m:{xs: 2}, cursor:'pointer'}}
-               onClick={onClickHandler}>
+          <Box 
+            sx={{
+              width: { xs: 40 },
+              "& .MuiInputBase-root": {height: 80},
+              m:{xs: 2},
+              cursor:'pointer'}}
+            onClick={onClickHandler}>
             {locale==='en'&&<SG title="Singapore" />}
             {locale==='cn'&&<CN title="China" />}
 

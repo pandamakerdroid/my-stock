@@ -3,7 +3,6 @@ import { Box,
          List,
          ListItem,
          ListItemButton,
-         Toolbar,
          Typography
 } from "@mui/material";
 
@@ -14,6 +13,8 @@ import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
+
+import { useLayoutEffect, useRef, useState } from "react";
 
 import { fetchQuote } from "@api/stockApi";
 import { useTranslation } from "react-i18next";
@@ -31,10 +32,7 @@ import {
 
 import {setSearchText} from '@store/slices/uiSlice';
 import TickerAutoComplete from '@partials/TickerAutoComplete';
-import { useState } from "react";
 import styles from '@components/ListPanel.module.scss'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { BorderAllRounded } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -70,9 +68,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: 'hidden',
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(6)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(6)} + 1px)`,
   },
 });
 
@@ -88,7 +86,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function ListPanel() {
   const dispatch = useAppDispatch();
 
-
   const theme = useTheme();
 
   const symbol= useAppSelector(selectSymbol)
@@ -100,14 +97,30 @@ function ListPanel() {
   const {t} = useTranslation('translation');
 
   const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const [displayText, setDisplayText] = useState(true);
 
   const handleDrawerOpened = () => {
     setOpen(open?false:true);
   };
+
+  const ref = useRef<HTMLInputElement>(null);
+
+  useLayoutEffect(() => {
+    if(ref.current){
+      const id = setInterval(()=>{
+        if(!open){
+          clearInterval(id);
+          setDisplayText(false);
+          return;
+        }
+        if(ref.current?.offsetWidth === drawerWidth){
+          clearInterval(id);
+          setDisplayText(true);
+          return;
+        }
+      },50)
+    }
+  },[open])
 
   const handleClick = (e:any) => {
     const historySymbol = (e.target.id && e.target.id!=='')?e.target.id:e.target.innerText
@@ -143,26 +156,32 @@ function ListPanel() {
             ))}
           </List>
         </Box>
-    </>
-  )
+      </>
+    )
 
     return <>
       <Drawer
+        ref={ref}
         variant="permanent"
         open={open}
+        id="list-panel-main"
+        sx={{"& .MuiDrawer-paper": {overflow: 'visible'}}}
       >
-        {open ?drawerContent:''}
+        { (open&&displayText) ?drawerContent:''}
         <DrawerHeader 
-          id="list-panel-main-header"
           sx={{position:'absolute',
                top:'30%',
                right:'-1.7rem',
-               float:'right',               
-        }}>
+               float:'right',
+          }}>
           <IconButton onClick={handleDrawerOpened}
             sx={{
               fontSize:'2rem',
-              background:'#6699ff44',
+              backgroundColor:'#cbb68288',
+              color:"#3f3f3f",
+              "&:hover":{
+                backgroundColor:'#cbb682cc'
+              }
             }}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
