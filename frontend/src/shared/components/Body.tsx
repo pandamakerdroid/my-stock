@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 
 function Body(props:any) {
     return (
-      <Container sx={{pt:5, mt:5, gap:2}}>
+      <Container sx={{mt:5, gap:1}}>
         <Routes>
           <Route path="/" element={<MyStocks/>}></Route>
           <Route path="/stocks" element={<MyStocks/>}></Route>

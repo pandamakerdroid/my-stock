@@ -41,10 +41,10 @@ const MyStocks = (props:{}) => {
     return (
 
         <Grid container spacing={2}>
-            <Grid item sm={0} md={3}>
+            <Grid item sm={0} md={1}>
                 <ListPanel></ListPanel>
             </Grid>
-            <Grid item sm={12} md={9}>
+            <Grid item sm={12} md={11}>
                 <Overview stock={
                     browseHistory.filter((stock:any)=>stock.symbol===symbol)[0] &&
                     browseHistory.filter((stock:any)=>stock.symbol===symbol)[0]?

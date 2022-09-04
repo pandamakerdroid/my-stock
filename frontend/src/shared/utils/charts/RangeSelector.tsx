@@ -34,7 +34,8 @@ const RangeSelector = () => {
       };
 
     return (
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <FormControl sx={{ mx:1, minWidth: 120 }}>
+          <FormHelperText>{t('overview.selectors.range')}</FormHelperText>
         <Select
           value={range}
           onChange={handleChange}
@@ -46,7 +47,6 @@ const RangeSelector = () => {
                 <MenuItem key={range} value={range}>{range}</MenuItem>)
             }
         </Select>
-        <FormHelperText>{t('overview.selectors.range')}</FormHelperText>
       </FormControl>
     )
 }

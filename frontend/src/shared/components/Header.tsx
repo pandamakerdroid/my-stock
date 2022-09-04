@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { useTranslation } from 'react-i18next';
 import { CN, SG } from 'country-flag-icons/react/3x2'
 import { useAppSelector, useAppDispatch } from '@store/hooks';
@@ -55,7 +55,25 @@ const Header = () => {
             sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <QueryStatsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            {t('title')}
+          </Typography>
           <Typography
             variant="h6"
             noWrap
@@ -72,7 +90,6 @@ const Header = () => {
           >
 
           </Typography>
-          <Link to="/">{t('title')}</Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -110,7 +127,7 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <QueryStatsIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -127,7 +144,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            My Stocks
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {t('nav.nav-items', { returnObjects: true }).map((item) => (
