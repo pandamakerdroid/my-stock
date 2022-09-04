@@ -1,5 +1,6 @@
 import { Box,
          Divider,
+         Drawer,
          List,
          ListItem,
          ListItemButton,
@@ -36,7 +37,7 @@ import styles from '@components/ListPanel.module.scss'
 
 const drawerWidth = 240;
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const ResponsiveDrawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
     flexShrink: 0,
@@ -118,7 +119,7 @@ function ListPanel() {
           setDisplayText(true);
           return;
         }
-      },50)
+      },100)
     }
   },[open])
 
@@ -160,12 +161,12 @@ function ListPanel() {
     )
 
     return <>
-      <Drawer
+      <ResponsiveDrawer
         ref={ref}
         variant="permanent"
         open={open}
         id="list-panel-main"
-        sx={{"& .MuiDrawer-paper": {overflow: 'visible'}}}
+        sx={{display:{xs:'block',sm:'block',md:'none'},"& .MuiDrawer-paper": {overflow: 'visible'}}}
       >
         { (open&&displayText) ?drawerContent:''}
         <DrawerHeader 
@@ -186,6 +187,17 @@ function ListPanel() {
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
+      </ResponsiveDrawer>
+      <Drawer
+        variant="permanent"
+        sx={{
+          display:{xs:'none',sm:'none',md:'block'},
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
+        { drawerContent }
       </Drawer>
     </>
 }
