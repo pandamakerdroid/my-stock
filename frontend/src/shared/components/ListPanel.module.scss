@@ -1,13 +1,13 @@
-.list{
+.list {
     color: #173A5E;
     padding: 0.5rem;
-    cursor:pointer;
+    cursor: pointer;
     &:hover {
-        background-color:#f1f1f1;
+        background-color: #f1f1f1;
     }
-    .ticker{
+    .ticker {
         position: absolute;
-        color: #88CA5E;
+        color: #a08c58; //#88CA5E;
         right: 0;
         opacity: 0.5;
         padding-right: 0.5rem;
@@ -15,7 +15,7 @@
         font-size: 2.2rem;
         text-shadow: rgb(136 202 94 / 47%) 0px 0px 6px;
     }
-    .name{
+    .name {
         font-size: 0.75rem;
         color: #000;
         width: 100%;

@@ -168,7 +168,7 @@ function ListPanel() {
         id="list-panel-main"
         sx={{display:{xs:'block',sm:'block',md:'none'},"& .MuiDrawer-paper": {overflow: 'visible'}}}
       >
-        { (open&&displayText) ?drawerContent:''}
+        { (open && displayText) ?drawerContent:''}
         <DrawerHeader 
           sx={{position:'absolute',
                top:'30%',

@@ -1,0 +1,34 @@
+.button {
+    background-color: white;
+    color: #786f37;
+    &:hover {
+        background-color: #e9dbbd;
+    }
+    &:active,
+    &:focus {
+        background-color: #cbb682;
+    }
+    margin-right: 0.5rem;
+}
+
+.link {
+    text-decoration: none;
+    background-color: white;
+    color: #181510;
+    padding: 0.7rem;
+    margin-right: 0.8rem;
+    border-radius: 3%;
+    &:hover {
+        background-color: #e9dbbd;
+        color: #785f37;
+    }
+    &:focus {
+        background-color: #cbb682;
+        color: #785f37 !important;
+    }
+}
+
+.active {
+    background-color: #cbb682;
+    color: #785f37 !important;
+}

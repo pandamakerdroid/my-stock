@@ -291,12 +291,12 @@ li.highcharts-active {
 
 /* Candle Colour */
 
-.highcharts-candlestick-series .highcharts-point {
+.highcharts-point.highcharts-color-0.highcharts-point-up {
     stroke: #00b894;
     fill: #00b894;
 }
 
-.highcharts-candlestick-series .highcharts-point-up {
+.highcharts-candlestick-series .highcharts-point {
     stroke: #ff7675;
     fill: #ff7675;
 }

@@ -20,8 +20,11 @@ import i18next from 'i18next';
 
 import { Link } from 'react-router-dom';
 
+import styles from './Header.module.scss';
 
 const Header = () => {
+  const pathname = window.location.pathname;
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -38,6 +41,13 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
+  const handleClick = (e:MouseEvent<HTMLElement>) => {
+    setAnchorElNav(null);
+    Array.prototype.map.call(document.getElementsByClassName(styles.link),(element =>
+      element.classList.remove(styles.active)))
+    document.getElementById(e.target.id)?.classList.add(styles.active);
+  };
+
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -50,9 +60,11 @@ const Header = () => {
     dispatch(setLocale(newLocale));
     i18next.changeLanguage(newLocale);
   }
+
+
   return (
     <AppBar position="fixed"
-            sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+            sx={{ backgroundColor: '#181510' ,zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <QueryStatsIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -147,13 +159,14 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {t('nav.nav-items', { returnObjects: true }).map((item) => (
-              <Button
-                key={item.name}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to={item.href}>{item.name}</Link>
-              </Button>
+                <Link
+                  id={item.name}
+                  key={item.name}
+                  onClick={handleClick}
+                  className={`${styles.link} ${pathname.includes(item.href)? styles.active:''}`}
+                  to={item.href}>
+                    {item.name}
+                </Link>
             ))}
           </Box>
 
@@ -170,7 +183,7 @@ const Header = () => {
           </Box>
          
 
-          <Box sx={{ flexGrow: 0 }}>
+          {false && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -198,7 +211,7 @@ const Header = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
       </Container>
     </AppBar>
